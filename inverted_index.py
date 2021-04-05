@@ -37,7 +37,7 @@ class MRInvertedIndex(MRJob):
         # split with space (for EN)
         # for word in line.split():
         # split with jieba (for ZH)
-        for word in word_segment(line.replace('\t', '')):
+        for word in word_segment(line):
             yield(word + ":" + file_name, 1)
 
     def combiner(self, key, values):
