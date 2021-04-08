@@ -35,6 +35,7 @@ def get_writer_list():
                     "url" : bf3.li.a['href'],
                     "author" : author,
                     "title" : bf3.li.a['title'],
+                    "name" : re.findall(r"(.*)作品", bf3.li.a['title'])[0],
                     "summary" : bf3.li.get_text(separator=" ", strip=True),
                 })
     return writer_list
