@@ -1,8 +1,9 @@
 # -*- coding: UTF-8 -*-
-import requests
-import sys
+
 import os
+import sys
 import re
+import requests
 from bs4 import BeautifulSoup
 
 def get_writer_list():
@@ -141,13 +142,17 @@ if __name__ == "__main__":
     headers = {
         "Cookie" : '__cfduid=d8e3c4012936e04db5a42fd7f3f0a11701617636299; atsrsmlusername=jiangmeng; atsrsmluserid=601404; atsrsmlgroupid=1; atsrsmlrnd=HTjaavuXyJgvn2KeijMu; atsrsmlauth=17fbf84dbc204ae3b4b88fb340acc563',
     }
+
+    # test cases
     # book_list = get_book_list('http://dongyeguiwu.zuopinj.com/')
     # book_list = get_book_list('http://zuopinj.com/kb/lilinqi/')
     # print(book_list)
     # url = get_download_url('http://xushengzhi.zuopinj.com/5580/')
     # print(url)
+
     # get writers
     writer_list = get_writer_list()
+    print("一共有 %d 个作家。" % len(writer_list))
     for writer in writer_list:
         dir = os.path.join(os.getcwd(), "docs", "zuopinj", writer["author"])
         if not os.path.exists(dir):

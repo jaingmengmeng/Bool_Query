@@ -1,6 +1,10 @@
 # -*- coding: UTF-8 -*-
+
 import os
+import sys
+import time
 import jieba
+from datetime import datetime
 from nltk.corpus import stopwords
 from mrjob.job import MRJob
 from mrjob.step import MRStep
@@ -55,4 +59,8 @@ class MRInvertedIndex(MRJob):
         yield(word, ';'.join(values))
 
 if __name__ == '__main__':
+    start_time = time.strftime("%Y-%m-%d %H:%M:%S\n", time.localtime())
+    sys.stderr.write(start_time)
     MRInvertedIndex.run()
+    end_time = time.strftime("%Y-%m-%d %H:%M:%S\n", time.localtime())
+    sys.stderr.write(end_time)
