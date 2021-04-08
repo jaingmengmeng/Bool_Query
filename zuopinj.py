@@ -111,19 +111,24 @@ def get_download_url(url):
         req.encoding = 'utf8'
         html = req.text
         bf1 = BeautifulSoup(html, features = "lxml")
-        btn_group = bf1.find('div', attrs={ "class": 'btn-group' })
-        bf2 = BeautifulSoup(str(btn_group), features = "lxml")
-        buttons = bf2.find_all('a')
-        bf3 = BeautifulSoup(str(buttons[2]), features = "lxml")
-        download_page = bf3.a['href']
+        if bf1.find('div', attrs={ "class": 'btn-group' }) != None:
+            btn_group = bf1.find('div', attrs={ "class": 'btn-group' })
+            bf2 = BeautifulSoup(str(btn_group), features = "lxml")
+            buttons = bf2.find_all('a')
+            bf3 = BeautifulSoup(str(buttons[2]), features = "lxml")
+            download_page = bf3.a['href']
+        else:
+            down = bf1.find('div', attrs={ "class": 'down' })
+            bf2 = BeautifulSoup(str(down), features = "lxml")
+            download_page = bf2.a['href']
 
         # second step
         req = requests.get(url = download_page)
         req.encoding = 'utf8'
         html = req.text
         bf1 = BeautifulSoup(html, features = "lxml")
-        info = bf1.find_all('div', attrs={ "class": 'xzxx' })
-        bf2 = BeautifulSoup(str(info[0]), features = "lxml")
+        info = bf1.find('div', attrs={ "class": 'xzxx' })
+        bf2 = BeautifulSoup(str(info), features = "lxml")
         buttons = bf2.find_all('p')
         bf3 = BeautifulSoup(str(buttons[4]), features = "lxml")
         download_url = bf3.a['href']
@@ -139,6 +144,8 @@ if __name__ == "__main__":
     # book_list = get_book_list('http://dongyeguiwu.zuopinj.com/')
     # book_list = get_book_list('http://zuopinj.com/kb/lilinqi/')
     # print(book_list)
+    # url = get_download_url('http://xushengzhi.zuopinj.com/5580/')
+    # print(url)
     # get writers
     writer_list = get_writer_list()
     for writer in writer_list:
@@ -149,9 +156,7 @@ if __name__ == "__main__":
         book_list = get_book_list(writer["url"])
         if len(book_list) == 0:
             print(writer)
-            exit
         for book in book_list:
-            print(book["title"])
             save_path = os.path.join(dir, book["title"] + ".txt")
             if not os.path.exists(save_path):
                 # download each book (.txt)
@@ -159,7 +164,10 @@ if __name__ == "__main__":
                 if download_url != "":
                     try:
                         r = requests.get(download_url, headers=headers)
-                        with open(save_path, "wb") as book:
-                            book.write(r.content)
+                        with open(save_path, "wb") as file:
+                            file.write(r.content)
+                        print(book["title"])
                     except:
-                        print(download_url)
+                        print(book["title"], download_url)
+                else:
+                    print(book["title"] + "【下载失败】")
