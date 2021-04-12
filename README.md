@@ -4,7 +4,10 @@ A simple search engine supports Boolean Query.
 
 # Usage
 
-```python
+```bash
+# run word count
+python word_count.py -r local docs/Shakespeare > output/word_count.txt
+# run inverted index
 python inverted_index.py -r local docs/Shakespeare > output/Shakespeare.txt
 ```
 
