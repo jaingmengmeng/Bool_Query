@@ -128,11 +128,14 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-#vscode
+# vscode
 .vscode/*
 
-#docs
+# docs
 docs/*
 
-#nohup
+# nohup
 nohup.out
+
+# output
+output/*
