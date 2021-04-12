@@ -15,7 +15,9 @@ def get_stopwords(file_name):
     return stopwords
 
 # stop_words = stopwords.words('english')
-stop_words = get_stopwords("/Users/youngjiang/Young/Course/IIR-XuJun/Bool_Query/cn_stopwords.txt")
+stop_words = get_stopwords("/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/cn_stopwords.txt")
+# stop_words = get_stopwords("/home/jly/Bool_Query/cn_stopwords.txt")
+# stop_words = get_stopwords(os.path.join(os.path.dirname(os.path.abspath(__file__)), "cn_stopwords.txt"))
 
 def word_segment(text):
     # word segment with jieba
@@ -25,6 +27,9 @@ def word_segment(text):
         if word not in stop_words:
             res.append(word)
     return res
+
+def get_count(item):
+    return item.split(":")[1]
 
 class MRInvertedIndex(MRJob):
     OUTPUT_PROTOCOL = RawProtocol
@@ -56,7 +61,9 @@ class MRInvertedIndex(MRJob):
         yield(word, file_name + ":" + str(sum))
 
     def reducer_2(self, word, values):
-        yield(word, ';'.join(values))
+        # yield(word, ';'.join(values))
+        # For a same word (key), sort by number of the word occurrences (value)
+        yield(word, ';'.join(sorted(values, key=get_count, reverse=True)))
 
 if __name__ == '__main__':
     start_time = time.strftime("%Y-%m-%d %H:%M:%S\n", time.localtime())
