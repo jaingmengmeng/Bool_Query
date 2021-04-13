@@ -1,10 +1,12 @@
 # -*- coding: UTF-8 -*-
 
 import os
-import sys
 import re
+import sys
+
 import requests
 from bs4 import BeautifulSoup
+
 
 def get_writer_list():
     writer_list = []

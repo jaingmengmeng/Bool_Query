@@ -3,12 +3,14 @@
 import os
 import sys
 import time
-import jieba
 from datetime import datetime
-from nltk.corpus import stopwords
+
+import jieba
 from mrjob.job import MRJob
-from mrjob.step import MRStep
 from mrjob.protocol import RawProtocol
+from mrjob.step import MRStep
+from nltk.corpus import stopwords
+
 
 def get_stopwords(file_name):
     stopwords = [line.strip() for line in open(file_name, 'r', encoding='utf-8').readlines()]

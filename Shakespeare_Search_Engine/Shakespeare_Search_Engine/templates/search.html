@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Shakespeare Search Engine</title>
+  </head>
+  <body>
+    <form action="/search/" method="post">
+      {% csrf_token %}
+      <input type="text" name="query" />
+      <input type="submit" value="搜索" />
+    </form>
+
+    <p>{{ query }}</p>
+    <ul>
+      {% for document in result %}
+      <li>{{ document.url }}——{{ document.count }}次</li>
+      {% empty %} 空空如也～ {% endfor %}
+    </ul>
+  </body>
+</html>

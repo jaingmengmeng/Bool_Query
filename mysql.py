@@ -1,5 +1,7 @@
 import os
+
 import pymysql
+
 
 class MySQL:
     """Connection to a MySQL"""
@@ -76,6 +78,8 @@ def get_dictionary(path):
 if __name__ == '__main__':
     # connect to mysql
     mysql = MySQL()
+    document_tb = 'SearchEngineModel_document'
+    dictionary_tb = 'SearchEngineModel_dictionary'
 
     # insert documents
     document_list = get_documents(os.path.join(os.getcwd(), 'docs', 'Shakespeare'))
@@ -87,10 +91,10 @@ if __name__ == '__main__':
     dictionary = get_dictionary(os.path.join(os.getcwd(), 'output', 'Shakespeare.txt'))
     for item in dictionary:
         for file in item['file_list']:
-            select_document = 'SELECT * FROM document WHERE url = "%s";' % (file['url'])
+            select_document = 'SELECT * FROM %s WHERE url = "%s";' % (document_tb, file['url'])
             results = mysql.fetchone(select_document)
             if results != None:
-                insert_dictionary = 'INSERT INTO dictionary (word, document_id, count) VALUES ("%s", %d, %d);' % (item['word'], results['id'], file['count'])
+                insert_dictionary = 'INSERT INTO %s (word, document_id, count) VALUES ("%s", %d, %d);' % (dictionary_tb, item['word'], results['document_id'], file['count'])
                 mysql.execute(insert_dictionary)
 
     # close database
