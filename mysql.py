@@ -84,23 +84,27 @@ if __name__ == '__main__':
     # insert documents
     document_list = get_documents(os.path.join(os.getcwd(), 'docs', 'Shakespeare'))
     for document in document_list:
-        insert_document = 'INSERT INTO document (url, title) VALUES ("%s", "%s");' % (document, os.path.splitext(document)[0])
-        mysql.execute(insert_document)
+        select_document = 'SELECT * FROM %s WHERE url="%s";' % (document_tb, document)
+        document_result = mysql.fetchone(select_document)
+        if document_result == None:
+            print(document)
+            insert_document = 'INSERT INTO document (url, title) VALUES ("%s", "%s");' % (document, os.path.splitext(document)[0])
+            mysql.execute(insert_document)
 
     # insert dictionary
     dictionary = get_dictionary(os.path.join(os.getcwd(), 'output', 'Shakespeare.txt'))
     for item in dictionary:
         for file in item['file_list']:
             select_document = 'SELECT * FROM %s WHERE url = "%s";' % (document_tb, file['url'])
-            results = mysql.fetchone(select_document)
-            if results != None:
-                select_dictionary = 'SELECT * FROM %s WHERE word="%s" AND document_id=%d;' % (dictionary_tb, item['word'], results['document_id'])
+            document_result = mysql.fetchone(select_document)
+            if document_result != None:
+                select_dictionary = 'SELECT * FROM %s WHERE word="%s" AND document_id=%d;' % (dictionary_tb, item['word'], document_result['document_id'])
                 dictionary_result = mysql.fetchone(select_dictionary)
                 if dictionary_result != None:
-                    update_dictionary = 'UPDATE %s SET count=%d WHERE word="%s" AND document_id=%d;' % (dictionary_tb, file['count'], item['word'], results['document_id'])
+                    update_dictionary = 'UPDATE %s SET count=%d WHERE word="%s" AND document_id=%d;' % (dictionary_tb, file['count'], item['word'], document_result['document_id'])
                     mysql.execute(update_dictionary)
                 else:
-                    insert_dictionary = 'INSERT INTO %s (word, document_id, count) VALUES ("%s", %d, %d);' % (dictionary_tb, item['word'], results['document_id'], file['count'])
+                    insert_dictionary = 'INSERT INTO %s (word, document_id, count) VALUES ("%s", %d, %d);' % (dictionary_tb, item['word'], document_result['document_id'], file['count'])
                     mysql.execute(insert_dictionary)
 
     # close database
