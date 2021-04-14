@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+    {% load static %}
     <meta charset="utf-8" />
     <title>Shakespeare Search Engine</title>
+    <link
+      rel="icon"
+      href="{% static 'images/shakespeare.ico' %}"
+      type="image/x-icon"
+    />
   </head>
   <body>
     <form action="/search/" method="post">
@@ -14,7 +20,12 @@
     <p>{{ query }}</p>
     <ul>
       {% for document in result %}
-      <li>{{ document.url }}——{{ document.count }}次</li>
+      <li>
+        <a href="{% url 'document' document.document_id %}">
+          {{ document.title }}
+        </a>
+        ——{{ document.count }}次
+      </li>
       {% empty %} 空空如也～ {% endfor %}
     </ul>
   </body>

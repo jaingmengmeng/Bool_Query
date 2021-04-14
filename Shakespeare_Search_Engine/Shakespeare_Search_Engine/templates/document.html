@@ -11,6 +11,11 @@
     />
   </head>
   <body>
-    {{ hello }}
+    <h1>{{ title }}</h1>
+    <div>
+      {% for line in content %}
+      <div>{{ line }}<br /></div>
+      {% empty %} 空空如也～ {% endfor %}
+    </div>
   </body>
 </html>

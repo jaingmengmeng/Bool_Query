@@ -16,11 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
-from . import views, search
+from . import views, search, document
 
 urlpatterns = [
-    url(r'^$', views.index),
+    url(r'^$', views.hello),
     path('admin/', admin.site.urls),
     path('hello/', views.hello),
     path('search/', search.search),
+    url('document/(\w+)', document.document, name='document'),
 ]
