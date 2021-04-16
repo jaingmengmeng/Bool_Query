@@ -1,6 +1,7 @@
 import os
 
 import pymysql
+from tqdm import tqdm
 
 
 class MySQL:
@@ -64,15 +65,18 @@ def get_dictionary(path):
         for line in file:
             if line != '\n':
                 word = line.split('\t')[0]
-                if word != '':
-                    file_list = [ {
-                        'url' : each.split(':')[0],
-                        'count' : int(each.split(':')[1])
-                    } for each in line.split('\t')[1].split(';')]
-                    dictionary.append({
-                            'word' : word,
-                            'file_list' : file_list
-                        })
+                if word != '' and word != ' ':
+                    try:
+                        file_list = [ {
+                            'url' : each.split(':')[0],
+                            'count' : int(each.split(':')[1])
+                        } for each in line.split('\t')[1].split(';')]
+                        dictionary.append({
+                                'word' : word,
+                                'file_list' : file_list
+                            })
+                    except:
+                        pass
     return dictionary
 
 if __name__ == '__main__':
@@ -82,18 +86,21 @@ if __name__ == '__main__':
     dictionary_tb = 'SearchEngineModel_dictionary'
 
     # insert documents
-    document_list = get_documents(os.path.join(os.getcwd(), 'docs', 'Shakespeare'))
+    # document_list = get_documents(os.path.join(os.getcwd(), 'docs', 'Shakespeare'))
+    document_list = get_documents(os.path.join(os.getcwd(), 'docs', 'zuopinj'))
     for document in document_list:
         select_document = 'SELECT * FROM %s WHERE url="%s";' % (document_tb, document)
         document_result = mysql.fetchone(select_document)
         if document_result == None:
             print(document)
-            insert_document = 'INSERT INTO document (url, title) VALUES ("%s", "%s");' % (document, os.path.splitext(document)[0])
+            insert_document = 'INSERT INTO %s (url, title) VALUES ("%s", "%s");' % (document_tb, document, os.path.splitext(document)[0])
             mysql.execute(insert_document)
 
     # insert dictionary
-    dictionary = get_dictionary(os.path.join(os.getcwd(), 'output', 'Shakespeare.txt'))
-    for item in dictionary:
+    # dictionary = get_dictionary(os.path.join(os.getcwd(), 'output', 'Shakespeare.txt'))
+    dictionary = get_dictionary(os.path.join(os.getcwd(), 'output', 'zuopinj.txt'))
+    for i in tqdm(range(len(dictionary))):
+        item = dictionary[i]
         for file in item['file_list']:
             select_document = 'SELECT * FROM %s WHERE url = "%s";' % (document_tb, file['url'])
             document_result = mysql.fetchone(select_document)

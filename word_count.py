@@ -1,15 +1,20 @@
 # -*- coding: UTF-8 -*-
 
 import os
+import re
+import string
 import sys
 import time
+import unicodedata
 from datetime import datetime
 
 import jieba
 from mrjob.job import MRJob
 from mrjob.protocol import RawProtocol
 from mrjob.step import MRStep
-from nltk.corpus import stopwords
+from zhon.hanzi import punctuation
+
+# from nltk.corpus import stopwords
 
 
 def get_stopwords(file_name):
@@ -17,21 +22,43 @@ def get_stopwords(file_name):
     return stopwords
 
 # stop_words = stopwords.words('english')
-stop_words = get_stopwords("/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/cn_stopwords.txt")
-# stop_words = get_stopwords("/home/jly/Bool_Query/cn_stopwords.txt")
-# stop_words = get_stopwords(os.path.join(os.path.dirname(os.path.abspath(__file__)), "cn_stopwords.txt"))
+stop_words = get_stopwords("cn_stopwords.txt")
+
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        pass
+ 
+    try:
+        unicodedata.numeric(s)
+        return True
+    except (TypeError, ValueError):
+        pass
+ 
+    return False
+
+def has_punctuation(s):
+    try:
+        if re.search(r'[%s]+' % (punctuation + string.punctuation), s) != None:
+            return True
+    except:
+        pass
+    return False
 
 def word_segment(text):
     # word segment with jieba
     seg = jieba.lcut_for_search(text, HMM=True)
     res = []
     for word in seg:
-        if word not in stop_words:
+        if word not in stop_words and not is_number(word) and not has_punctuation(word):
             res.append(word)
     return res
 
 class MRWordCount(MRJob):
     OUTPUT_PROTOCOL = RawProtocol
+    FILES = ['cn_stopwords.txt']
 
     def mapper(self, _, line):
         for word in word_segment(line):
