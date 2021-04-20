@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'SearchEngineModel',
 ]
 
 MIDDLEWARE = [
@@ -81,17 +80,6 @@ WSGI_APPLICATION = 'Shakespeare_Search_Engine.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-DATABASES = { 
-    'default': 
-    { 
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'BOOL_QUERY',
-        'HOST': '127.0.0.1', 
-        'PORT': 3306,
-        'USER': 'root',
-        'PASSWORD': '18810877326',
-    }  
-}
 
 
 # Password validation
@@ -131,8 +119,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [ 
-    os.path.join(os.path.join(BASE_DIR, 'Shakespeare_Search_Engine', "statics")), 
+STATICFILES_DIRS = [
+    os.path.join(os.path.join(
+        BASE_DIR, 'Shakespeare_Search_Engine', "statics")),
 ]
 
 # Default primary key field type

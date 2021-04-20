@@ -23,5 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello/', views.hello),
     path('search/', search.search),
-    url('document/(\w+)', document.document, name='document'),
+    url('document/([\w.]+)', document.document, name='document'),
 ]

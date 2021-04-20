@@ -16,17 +16,25 @@
       <input type="text" name="query" />
       <input type="submit" value="搜索" />
     </form>
-
-    <p>{{ query }}</p>
-    <ul>
-      {% for document in result %}
-      <li>
-        <a href="{% url 'document' document.document_id %}">
-          {{ document.title }}
-        </a>
-        ——{{ document.count }}次
-      </li>
-      {% empty %} 空空如也～ {% endfor %}
-    </ul>
+    {% if query.strip %}
+    <p>查询词条：{{ query.strip }}</p>
+    <p>
+      分词结果：{% for word in query_list %} {{ word.strip }} {% empty %}
+      空空如也～ {% endfor %}
+    </p>
+    <div>
+      查询结果：
+      <ul>
+        {% for document in result %}
+        <li>
+          <a href="{% url 'document' document.url %}">
+            {{ document.title.strip }}
+          </a>
+          [{{ document.count }}次]
+        </li>
+        {% empty %} 空空如也～ {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
   </body>
 </html>
