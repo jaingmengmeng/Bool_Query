@@ -6,12 +6,10 @@ from django.views.decorators import csrf
 
 def document(request, url):
     ctx = {}
-    print(url)
     ctx['title'] = os.path.splitext(url)[0]
     ctx['url'] = url
     file_path = os.path.join(
         os.getcwd(), '..', 'docs', 'Shakespeare', url)
-    print(file_path)
     content_list = []
     if os.path.exists(file_path):
         with open(file_path, 'r') as f:

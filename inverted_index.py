@@ -1,5 +1,3 @@
-# -*- coding: UTF-8 -*-
-
 import os
 import sys
 import time
@@ -8,12 +6,12 @@ from mrjob.job import MRJob
 from mrjob.protocol import RawProtocol
 from mrjob.step import MRStep
 
-from utils import get_count, word_segment, doc_list
+from utils import Doc_List, Word_Segment
 
 
 class MRInvertedIndex(MRJob):
     OUTPUT_PROTOCOL = RawProtocol
-    FILES = ['cn_stopwords.txt', 'utils.py']
+    FILES = ['cn_stopwords.txt', 'utils.py', 'Shakespeare_list.txt']
 
     def steps(self):
         return[
@@ -23,15 +21,16 @@ class MRInvertedIndex(MRJob):
         ]
 
     def mapper(self, _, line):
+        WS = Word_Segment()
+        DL = Doc_List()
         # get file name
         file_name = os.path.split(os.environ["map_input_file"])[1]
         # split with space (for EN)
         # for word in line.split():
         # split with jieba (for ZH)
-        for word in word_segment(line):
-            # index = doc_list.index(file_name)
-            index = file_name
-            yield(word + ":" + index, 1)
+        for word in WS.word_segment(line):
+            index = DL.get_doc_index(file_name)
+            yield(word + ":" + str(index), 1)
 
     def combiner(self, key, values):
         yield(key, sum(values))
@@ -47,7 +46,10 @@ class MRInvertedIndex(MRJob):
     def reducer_2(self, word, values):
         # yield(word, ';'.join(values))
         # For a same word (key), sort by number of the word occurrences (value)
-        yield(word, ';'.join(sorted(values, key=get_count, reverse=True)))
+        yield(word, ';'.join(sorted(values, key=self.__get_count, reverse=True)))
+
+    def __get_count(self, item):
+        return item.split(":")[1]
 
 
 if __name__ == '__main__':

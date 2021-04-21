@@ -7,63 +7,79 @@ import jieba
 from zhon.hanzi import punctuation
 
 
-def get_stopwords(file_name):
-    stopwords = [line.strip() for line in open(
-        file_name, 'r', encoding='utf-8').readlines()]
-    return stopwords
+class Doc_List:
+    def __init__(self, path='Shakespeare_list.txt'):
+        self.path = path
+        self.doc_list = self.__get_doc_list(path)
+
+    def __get_doc_list(self, path):
+        result = [line.strip() for line in open(
+            path, 'r', encoding='utf-8').readlines()]
+        return result
+
+    def get_doc_index(self, file_name):
+        if file_name in self.doc_list:
+            return self.doc_list.index(file_name)
+        else:
+            return None
+
+    def get_doc_by_index(self, index):
+        if index < len(self.doc_list):
+            return self.doc_list[index]
+        else:
+            return None
 
 
-# from nltk.corpus import stopwords
-# stop_words = stopwords.words('english')
-stop_words = get_stopwords("cn_stopwords.txt")
+class Word_Segment:
+    def __init__(self, path='cn_stopwords.txt'):
+        # from nltk.corpus import stopwords
+        # stop_words = stopwords.words('english')
+        self.__stop_words = self.__get_stopwords(path)
 
+    def __get_stopwords(self, file_name):
+        result = [line.strip() for line in open(
+            file_name, 'r', encoding='utf-8').readlines()]
+        return result
 
-def get_doc_list(dir):
-    doc_list = []
-    for root, dirs, files in os.walk(dir):
-        for file in files:
-            if os.path.splitext(file)[1] == '.txt':
-                doc_list.append(file)
-    return doc_list
+    def word_segment(self, text):
+        # word segment with jieba
+        seg = jieba.lcut_for_search(text, HMM=True)
+        result = []
+        for word in seg:
+            if word not in self.__stop_words and not self.__is_number(word) and not self.__has_punctuation(word):
+                result.append(word)
+        return result
 
-
-doc_list = get_doc_list('docs/Shakespeare')
-
-
-def is_number(s):
-    try:
-        float(s)
-        return True
-    except ValueError:
-        pass
-
-    try:
-        unicodedata.numeric(s)
-        return True
-    except (TypeError, ValueError):
-        pass
-
-    return False
-
-
-def has_punctuation(s):
-    try:
-        if re.search(r'[%s]+' % (punctuation + string.punctuation), s) != None:
+    def __is_number(self, s):
+        try:
+            float(s)
             return True
-    except:
-        pass
-    return False
+        except ValueError:
+            pass
+        try:
+            unicodedata.numeric(s)
+            return True
+        except (TypeError, ValueError):
+            pass
+        return False
+
+    def __has_punctuation(self, s):
+        try:
+            if re.search(r'[%s]+' % (punctuation + string.punctuation), s) != None:
+                return True
+        except:
+            pass
+        return False
 
 
-def word_segment(text):
-    # word segment with jieba
-    seg = jieba.lcut_for_search(text, HMM=True)
-    res = []
-    for word in seg:
-        if word not in stop_words and not is_number(word) and not has_punctuation(word):
-            res.append(word)
-    return res
+def save_to_txt(doc_dir='docs/Shakespeare', save_path='Shakespeare_list.txt'):
+    with open(save_path, "w") as f:
+        for root, dirs, files in os.walk(doc_dir):
+            for file in files:
+                if os.path.splitext(file)[1] == '.txt':
+                    f.write(file)
+                    f.write('\n')
 
 
-def get_count(item):
-    return item.split(":")[1]
+if __name__ == '__main__':
+    save_to_txt()

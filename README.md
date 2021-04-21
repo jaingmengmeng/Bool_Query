@@ -6,10 +6,10 @@ A simple search engine supports Boolean Query.
 
 ```bash
 # run word count
-python word_count.py -r local docs/Shakespeare > output/word_count.txt
+python word_count.py -r local docs/Shakespeare > word_count.txt
 
 # run inverted index
-python inverted_index.py -r local docs/Shakespeare > output/Shakespeare.txt
+python inverted_index.py -r local docs/Shakespeare > Shakespeare.txt
 
 # run django demo
 cd Shakespeare_Search_Engine

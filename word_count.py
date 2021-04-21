@@ -1,5 +1,3 @@
-# -*- coding: UTF-8 -*-
-
 import os
 import sys
 import time
@@ -8,7 +6,7 @@ from mrjob.job import MRJob
 from mrjob.protocol import RawProtocol
 from mrjob.step import MRStep
 
-from utils import get_count, word_segment
+from utils import Doc_List, Word_Segment
 
 
 class MRWordCount(MRJob):
@@ -16,7 +14,9 @@ class MRWordCount(MRJob):
     FILES = ['cn_stopwords.txt', 'utils.py']
 
     def mapper(self, _, line):
-        for word in word_segment(line):
+        WS = Word_Segment()
+        DL = Doc_List()
+        for word in WS.word_segment(line):
             yield(word, 1)
 
     def reducer(self, word, counts):
