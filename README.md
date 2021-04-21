@@ -14,6 +14,7 @@ python inverted_index.py -r local docs/Shakespeare > Shakespeare.txt
 # run django demo
 cd Shakespeare_Search_Engine
 python manage.py runserver
+python manage.py runserver 0.0.0.0:8000 (allow all hosts)
 ```
 
 Browser open: http://127.0.0.1:8000/

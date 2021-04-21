@@ -4,8 +4,7 @@ from functools import reduce
 from django.shortcuts import render
 from django.views.decorators import csrf
 
-from .utils import Word_Segment, Doc_List
-
+from .utils import Doc_List, Word_Segment
 
 # Word_Segment & Doc_List
 WS = Word_Segment()

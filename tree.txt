@@ -1,0 +1,35 @@
+.
+├── .gitignore
+├── LICENSE
+├── README.md
+├── Shakespeare.txt
+├── Shakespeare_Search_Engine
+│   ├── Shakespeare_Search_Engine
+│   │   ├── __init__.py
+│   │   ├── asgi.py
+│   │   ├── document.py
+│   │   ├── search.py
+│   │   ├── settings.py
+│   │   ├── statics
+│   │   │   └── images
+│   │   │       ├── shakespeare.ico
+│   │   │       ├── shakespeare.jpg
+│   │   │       └── shakespeare2.jpg
+│   │   ├── templates
+│   │   │   ├── document.html
+│   │   │   ├── index.html
+│   │   │   └── search.html
+│   │   ├── urls.py
+│   │   ├── utils.py
+│   │   ├── views.py
+│   │   └── wsgi.py
+│   └── manage.py
+├── Shakespeare_list.txt
+├── cn_stopwords.txt
+├── docs
+│   └── Shakespeare
+├── inverted_index.py
+├── tree.txt
+├── utils.py
+├── word_count.py
+└── zuopinj.py
