@@ -1,33 +1,33 @@
-第十二夜.txt
-亨利四世.txt
-科利奥兰纳斯.txt
-终成眷属.txt
-冬天的故事.txt
-罗密欧与朱丽叶.txt
-威尼斯商人.txt
-哈姆雷特.txt
-泰尔亲王配力克里斯.txt
-错误的喜剧.txt
-安东尼与克莉奥佩特拉.txt
-维洛那二绅士.txt
-辛白林.txt
-雅典的泰门.txt
-驯悍记.txt
-仲夏夜之梦.txt
-皆大欢喜.txt
-亨利五世.txt
-温莎的风流娘儿们.txt
-爱的徒劳.txt
-李尔王.txt
-特洛伊罗斯与克瑞西达.txt
-麦克白.txt
-一报还一报.txt
-亨利八世.txt
-理查三世.txt
-奥瑟罗.txt
-理查二世.txt
-暴风雨.txt
-泰特斯·安德洛尼克斯.txt
-无事生非.txt
-亨利六世.txt
-裘力斯·凯撒.txt
+第十二夜.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/第十二夜.txt
+亨利四世.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/亨利四世.txt
+科利奥兰纳斯.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/科利奥兰纳斯.txt
+终成眷属.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/终成眷属.txt
+冬天的故事.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/冬天的故事.txt
+罗密欧与朱丽叶.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/罗密欧与朱丽叶.txt
+威尼斯商人.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/威尼斯商人.txt
+哈姆雷特.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/哈姆雷特.txt
+泰尔亲王配力克里斯.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/泰尔亲王配力克里斯.txt
+错误的喜剧.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/错误的喜剧.txt
+安东尼与克莉奥佩特拉.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/安东尼与克莉奥佩特拉.txt
+维洛那二绅士.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/维洛那二绅士.txt
+辛白林.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/辛白林.txt
+雅典的泰门.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/雅典的泰门.txt
+驯悍记.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/驯悍记.txt
+仲夏夜之梦.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/仲夏夜之梦.txt
+皆大欢喜.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/皆大欢喜.txt
+亨利五世.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/亨利五世.txt
+温莎的风流娘儿们.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/温莎的风流娘儿们.txt
+爱的徒劳.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/爱的徒劳.txt
+李尔王.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/李尔王.txt
+特洛伊罗斯与克瑞西达.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/特洛伊罗斯与克瑞西达.txt
+麦克白.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/麦克白.txt
+一报还一报.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/一报还一报.txt
+亨利八世.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/亨利八世.txt
+理查三世.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/理查三世.txt
+奥瑟罗.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/奥瑟罗.txt
+理查二世.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/理查二世.txt
+暴风雨.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/暴风雨.txt
+泰特斯·安德洛尼克斯.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/泰特斯·安德洛尼克斯.txt
+无事生非.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/无事生非.txt
+亨利六世.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/亨利六世.txt
+裘力斯·凯撒.txt	/Users/youngjiang/Young/Course/2021-Spring/IIR-XuJun/Bool_Query/docs/Shakespeare/裘力斯·凯撒.txt

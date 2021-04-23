@@ -27,7 +27,7 @@
       <ul>
         {% for document in result %}
         <li>
-          <a href="{% url 'document' document.url %}">
+          <a href="{% url 'document' document.file %}">
             {{ document.title.strip }}
           </a>
           [{{ document.count }}次]

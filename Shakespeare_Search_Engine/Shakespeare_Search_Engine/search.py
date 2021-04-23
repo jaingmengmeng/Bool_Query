@@ -22,7 +22,7 @@ def get_dictionary(path):
                     try:
                         file_list = [{
                             'index': int(each.split(':')[0]),
-                            'url': DL.get_doc_by_index(int(each.split(':')[0])),
+                            'url': DL.get_url_by_index(int(each.split(':')[0])),
                             'count': int(each.split(':')[1])
                         } for each in line.split('\t')[1].split(';')]
                         dictionary[word] = file_list
@@ -73,7 +73,8 @@ def search(request):
             document_list.append({
                 'url': item['url'],
                 'count': item['count'],
-                'title': os.path.splitext(item['url'])[0],
+                'title': os.path.splitext(os.path.basename(item['url']))[0],
+                'file': os.path.basename(item['url']),
             })
 
         # sort by count DESC

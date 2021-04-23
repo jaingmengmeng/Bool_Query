@@ -11,10 +11,18 @@ class Doc_List:
     def __init__(self, path=os.path.join(os.getcwd(), '..', 'Shakespeare_list.txt')):
         self.path = path
         self.doc_list = self.__get_doc_list(path)
+        self.doc_dict = self.__get_doc_dict(path)
 
     def __get_doc_list(self, path):
-        result = [line.strip() for line in open(
+        result = [line.strip().split('\t')[0] for line in open(
             path, 'r', encoding='utf-8').readlines()]
+        return result
+
+    def __get_doc_dict(self, path):
+        result = {}
+        for line in open(path, 'r', encoding='utf-8').readlines():
+            doc_info = line.strip().split('\t')
+            result[doc_info[0]] = doc_info[1]
         return result
 
     def get_doc_index(self, file_name):
@@ -26,6 +34,12 @@ class Doc_List:
     def get_doc_by_index(self, index):
         if index < len(self.doc_list):
             return self.doc_list[index]
+        else:
+            return None
+
+    def get_url_by_index(self, index):
+        if index < len(self.doc_list):
+            return self.doc_dict[self.doc_list[index]]
         else:
             return None
 
