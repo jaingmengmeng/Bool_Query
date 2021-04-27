@@ -3,7 +3,7 @@
   <head>
     {% load static %}
     <meta charset="utf-8" />
-    <title>Shakespeare Search Engine</title>
+    <title>Bool Query</title>
     <link
       rel="icon"
       href="{% static 'images/shakespeare.ico' %}"
@@ -11,11 +11,6 @@
     />
   </head>
   <body>
-    <h1>{{ title }}</h1>
-    <div>
-      {% for line in content %}
-      <div>{{ line }}<br /></div>
-      {% empty %} 空空如也～ {% endfor %}
-    </div>
+    {{ hello }}
   </body>
 </html>

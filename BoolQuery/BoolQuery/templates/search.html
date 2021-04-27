@@ -3,7 +3,7 @@
   <head>
     {% load static %}
     <meta charset="utf-8" />
-    <title>Shakespeare Search Engine</title>
+    <title>Bool Query</title>
     <link
       rel="icon"
       href="{% static 'images/shakespeare.ico' %}"
@@ -27,10 +27,10 @@
       <ul>
         {% for document in result %}
         <li>
+          {{ document.index }}
           <a href="{% url 'document' document.file %}">
             {{ document.title.strip }}
           </a>
-          [{{ document.count }}次]
         </li>
         {% empty %} 空空如也～ {% endfor %}
       </ul>

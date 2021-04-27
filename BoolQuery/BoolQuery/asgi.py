@@ -1,5 +1,5 @@
 """
-ASGI config for Shakespeare_Search_Engine project.
+ASGI config for BoolQuery project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Shakespeare_Search_Engine.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'BoolQuery.settings')
 
 application = get_asgi_application()

@@ -1,3 +1,5 @@
+import getopt
+import sys
 import os
 import re
 import string
@@ -8,7 +10,7 @@ from zhon.hanzi import punctuation
 
 
 class Doc_List:
-    def __init__(self, path='Shakespeare_list.txt'):
+    def __init__(self, path='doc_list.txt'):
         self.path = path
         self.doc_list = self.__get_doc_list(path)
         self.doc_dict = self.__get_doc_dict(path)
@@ -86,7 +88,7 @@ class Word_Segment:
         return False
 
 
-def save_to_txt(doc_dir=os.path.join('docs', 'Shakespeare'), save_path='Shakespeare_list.txt'):
+def save_to_txt(doc_dir=os.path.join('docs', 'Shakespeare'), save_path='doc_list.txt'):
     with open(save_path, 'w') as f:
         for root, dirs, files in os.walk(doc_dir):
             for file in files:
@@ -96,5 +98,25 @@ def save_to_txt(doc_dir=os.path.join('docs', 'Shakespeare'), save_path='Shakespe
                     f.write('\n')
 
 
-if __name__ == '__main__':
-    save_to_txt()
+def main(argv):
+    dir = ''
+    try:
+        opts, args = getopt.getopt(argv, "hr:", ["dir="])
+    except getopt.GetoptError:
+        print('utils.py -r <directory>')
+        sys.exit(2)
+    for opt, arg in opts:
+        if opt in ("-r", "--dir"):
+            dir = arg
+        elif opt == '-h':
+            print('test.py -r <directory>')
+            sys.exit()
+    if dir != '':
+        save_to_txt(doc_dir=dir)
+    else:
+        print('test.py -r <directory>')
+        sys.exit()
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:])

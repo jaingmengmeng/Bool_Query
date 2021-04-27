@@ -11,13 +11,11 @@ from utils import Doc_List, Word_Segment
 
 class MRInvertedIndex(MRJob):
     OUTPUT_PROTOCOL = RawProtocol
-    FILES = ['cn_stopwords.txt', 'utils.py', 'Shakespeare_list.txt']
+    FILES = ['cn_stopwords.txt', 'utils.py', 'doc_list.txt']
 
     def steps(self):
         return[
-            MRStep(mapper=self.mapper, combiner=self.combiner,
-                   reducer=self.reducer_1),
-            MRStep(reducer=self.reducer_2)
+            MRStep(mapper=self.mapper, reducer=self.reducer)
         ]
 
     def mapper(self, _, line):
@@ -30,26 +28,13 @@ class MRInvertedIndex(MRJob):
         # split with jieba (for ZH)
         for word in WS.word_segment(line):
             index = DL.get_doc_index(file_name)
-            yield(word + ":" + str(index), 1)
+            yield(word, str(index))
 
-    def combiner(self, key, values):
-        yield(key, sum(values))
+    def reducer(self, key, values):
+        yield(key, ','.join(sorted(set(values), key=self.__cmp, reverse=False)))
 
-    def reducer_1(self, key, values):
-        sum = 0
-        for value in values:
-            sum += value
-        word = key.split(":")[0]
-        index = key.split(":")[1]
-        yield(word, index + ":" + str(sum))
-
-    def reducer_2(self, word, values):
-        # yield(word, ';'.join(values))
-        # For a same word (key), sort by number of the word occurrences (value)
-        yield(word, ';'.join(sorted(values, key=self.__get_count, reverse=True)))
-
-    def __get_count(self, item):
-        return item.split(":")[1]
+    def __cmp(self, index):
+        return int(index)
 
 
 if __name__ == '__main__':

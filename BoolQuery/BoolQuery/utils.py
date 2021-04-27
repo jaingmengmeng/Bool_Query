@@ -8,7 +8,7 @@ from zhon.hanzi import punctuation
 
 
 class Doc_List:
-    def __init__(self, path=os.path.join(os.getcwd(), '..', 'Shakespeare_list.txt')):
+    def __init__(self, path=os.path.join(os.getcwd(), '..', 'doc_list.txt')):
         self.path = path
         self.doc_list = self.__get_doc_list(path)
         self.doc_dict = self.__get_doc_dict(path)

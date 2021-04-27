@@ -8,11 +8,14 @@ A simple search engine supports Boolean Query.
 # run word count
 python word_count.py -r local docs/Shakespeare > word_count.txt
 
-# run inverted index
-python inverted_index.py -r local docs/Shakespeare > Shakespeare.txt
+# run doc list, generate doc_list.txt
+python utils -r docs/Shakespeare
+
+# run inverted index, generate index_list.txt
+python inverted_index.py -r local docs/Shakespeare > index_list.txt
 
 # run django demo
-cd Shakespeare_Search_Engine
+cd BoolQuery
 python manage.py runserver
 python manage.py runserver 0.0.0.0:8000 (allow all hosts)
 ```
