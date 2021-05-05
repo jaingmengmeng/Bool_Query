@@ -151,11 +151,27 @@ class Bool_Query:
         for operator in operators_list:
             pos = query.find(operator, start)
             if query[start:pos].strip() != '':
-                result.append(query[start:pos].strip())
+                keyword = query[start:pos].strip()
+                result = result + self.__split(keyword)
             result.append(operator)
             start = pos + len(operator)
         if start < len(query):
-            result.append(query[start:].strip())
+            keyword = query[start:].strip()
+            result = result + self.__split(keyword)
+        return result
+
+    def __split(self, keyword):
+        result = []
+        keyword_list = keyword.split(' ')
+        if len(keyword_list) == 1:
+            result.append(keyword)
+        else:
+            result.append('(')
+            for i in range(len(keyword_list)):
+                if i > 0:
+                    result.append('AND')
+                result.append(keyword_list[i])
+            result.append(')')
         return result
 
     def solve(self, query):
@@ -163,7 +179,6 @@ class Bool_Query:
         print(parser_result)
         operators_stack = Stack()
         operands_stack = Stack()
-
         for token in parser_result:
             if token in self.operators[0:4]:
                 if operators_stack.is_empty():
@@ -189,14 +204,16 @@ class Bool_Query:
                 operators_stack.pop()
             else:
                 operands_stack.push(self.get_index_list(token))
-
         while operands_stack.size() > 1:
             op = operators_stack.pop()
             op2 = operands_stack.pop()
             op1 = operands_stack.pop()
             result = self.__calculate(op, op1, op2)
             operands_stack.push(result)
-        return operands_stack.pop()
+        if operands_stack.size() > 0:
+            return parser_result, operands_stack.pop()
+        else:
+            return parser_result, []
 
 
 DL = Doc_List()
@@ -208,19 +225,21 @@ def search(request):
     if request.POST:
         # get parameters query and do word segment
         query = request.POST['query'].strip()
-
         # result
         document_list = []
-        for item in BQ.solve(query):
-            document_list.append({
-                'index': item,
-                'url': DL.get_url_by_index(item),
-                'title': os.path.splitext(os.path.basename(DL.get_url_by_index(item)))[0],
-                'file': os.path.basename(DL.get_url_by_index(item)),
-            })
-
-        # sort by count DESC
-        document_list.sort(key=lambda item: item['index'], reverse=False)
-        ctx['result'] = document_list
-        ctx['query'] = query
+        if query != '':
+            parser_result, bool_query_result = BQ.solve(query)
+            print(bool_query_result)
+            for item in bool_query_result:
+                document_list.append({
+                    'index': item,
+                    'url': DL.get_url_by_index(item),
+                    'title': os.path.splitext(os.path.basename(DL.get_url_by_index(item)))[0],
+                    'file': os.path.basename(DL.get_url_by_index(item)),
+                })
+            # sort by count DESC
+            document_list.sort(key=lambda item: item['index'], reverse=False)
+            ctx['parser_result'] = parser_result
+            ctx['result'] = document_list
+            ctx['query'] = query
     return render(request, 'search.html', ctx)

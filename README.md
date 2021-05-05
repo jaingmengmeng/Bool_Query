@@ -9,7 +9,7 @@ A simple search engine supports Boolean Query.
 python word_count.py -r local docs/Shakespeare > word_count.txt
 
 # run doc list, generate doc_list.txt
-python utils -r docs/Shakespeare
+python utils.py -r docs/Shakespeare
 
 # run inverted index, generate index_list.txt
 python inverted_index.py -r local docs/Shakespeare > index_list.txt

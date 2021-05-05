@@ -11,30 +11,52 @@
     />
   </head>
   <body>
-    <form action="/search/" method="post">
-      {% csrf_token %}
-      <input type="text" name="query" />
-      <input type="submit" value="搜索" />
-    </form>
-    {% if query.strip %}
-    <p>查询词条：{{ query.strip }}</p>
-    <p>
-      分词结果：{% for word in query_list %} {{ word.strip }} {% empty %}
-      空空如也～ {% endfor %}
-    </p>
-    <div>
-      查询结果：
-      <ul>
-        {% for document in result %}
-        <li>
-          {{ document.index }}
-          <a href="{% url 'document' document.file %}">
-            {{ document.title.strip }}
-          </a>
-        </li>
-        {% empty %} 空空如也～ {% endfor %}
-      </ul>
+    <div class="center" style="width: 50%; margin: auto">
+      <form action="/search/" method="post" style="width: 100%">
+        {% csrf_token %}
+        <input
+          type="text"
+          name="query"
+          style="
+            width: 80%;
+            font-size: 20px;
+            font-family: 'Microsoft soft';
+            padding: 7px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+          "
+        />
+        <input
+          type="submit"
+          value="搜索"
+          style="
+            width: 9%;
+            font-size: 20px;
+            font-family: 'Microsoft soft';
+            padding: 7px;
+          "
+        />
+      </form>
+      {% if query.strip %}
+      <p>查询词条：{{ query.strip }}</p>
+      <p>
+        分词结果：{% for word in parser_result %} {{ word.strip }} {% empty %}
+        空空如也～ {% endfor %}
+      </p>
+      <div>
+        查询结果：
+        <ul>
+          {% for document in result %}
+          <li>
+            {{ document.index }}
+            <a href="{% url 'document' document.file %}">
+              {{ document.title.strip }}
+            </a>
+          </li>
+          {% empty %} 空空如也～ {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
     </div>
-    {% endif %}
   </body>
 </html>
